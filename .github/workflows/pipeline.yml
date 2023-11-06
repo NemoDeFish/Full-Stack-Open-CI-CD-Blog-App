@@ -18,6 +18,8 @@ jobs:
           node-version: "16"
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: npm install
+      - run: npm install
+        working-directory: ./frontend
       - name: lint
         run: npm run eslint
       - name: build
