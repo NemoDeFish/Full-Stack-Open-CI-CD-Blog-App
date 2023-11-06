@@ -19,8 +19,8 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Install backend dependencies
         run: npm install
-      - name: Install frontend dependencies 
-      run: npm install
+      - name: Install frontend dependencies
+        run: npm install
         working-directory: ./frontend
       - name: lint
         run: npm run eslint
