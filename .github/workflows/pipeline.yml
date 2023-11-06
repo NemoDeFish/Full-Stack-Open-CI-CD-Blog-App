@@ -28,12 +28,16 @@ jobs:
         run: npm run build:ui
       - name: test
         run: npm test
+        env:
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:3003
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: deploy
         if: ${{ github.event_name == 'push' && ! contains(join(github.event.commits.*.message), '#skip') }}
         run: flyctl deploy --remote-only
