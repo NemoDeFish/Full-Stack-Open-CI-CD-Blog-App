@@ -41,7 +41,7 @@ jobs:
           start: npm run start:test
           wait-on: http://localhost:3003
         env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
       - name: deploy
         if: ${{ github.event_name == 'push' && ! contains(join(github.event.commits.*.message), '#skip') }}
         run: flyctl deploy --remote-only
