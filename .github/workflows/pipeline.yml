@@ -8,6 +8,8 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+env:
+  PORT: 3003
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
