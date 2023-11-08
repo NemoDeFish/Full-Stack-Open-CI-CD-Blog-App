@@ -59,7 +59,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ failure() && ! github.event_name == 'push' }}
+        if: ${{ failure() && github.event_name == 'pull_request' }}
         with:
           text: Build failed
           severity: error
