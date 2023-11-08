@@ -50,12 +50,21 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ failure() }}
+        if: ${{ failure() && github.event_name == 'push' }}
         with:
           text: Build failed
           severity: error
           description: commit
           details: "${{ github.event.head_commit.url }} by ${{ github.event.pusher.name }} broke the build :("
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() && ! github.event_name == 'push' }}
+        with:
+          text: Build failed
+          severity: error
+          description: commit
+          details: "${{ github.event.pull_request.commits_url }} by ${{ github.event.sender }} broke the build :("
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     if: ${{ github.event_name == 'push' && ! contains(join(github.event.commits.*.message), '#skip') }}
