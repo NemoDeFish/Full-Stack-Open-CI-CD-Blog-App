@@ -76,19 +76,3 @@ jobs:
           severity: info
           description: to https://restless-fog-556.fly.dev/ by ${{ github.event.pusher.name }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-  a_test_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
