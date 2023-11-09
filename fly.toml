@@ -4,7 +4,7 @@
 #
 
 app = "restless-fog-556"
-primary_region = "sin"
+primary_region = "hkg"
 
 [deploy]
   release_command = "npm run build:ui"
